@@ -17,7 +17,7 @@ public class Product implements Serializable {
     }
 
     private void calculateTotal() {
-        this.total = price+quantity;
+        this.total = price*quantity;
     }
 
 
