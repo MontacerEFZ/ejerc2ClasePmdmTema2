@@ -8,4 +8,6 @@
     <string name="ok">Ok</string>
     <string name="titleCreate">CREATE PRODUCT</string>
     <string name="missing">Missing Data</string>
+    <string name="delete">delete: are you sure?</string>
+    <string name="update">UPDATE PRODUCT</string>
 </resources>

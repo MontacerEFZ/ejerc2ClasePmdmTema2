@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ejerc5ClasePmdmTema1</string>
+    <string name="name">nombre</string>
+    <string name="quantity">cantidad</string>
+    <string name="price">precio</string>
+    <string name="total">total</string>
+    <string name="cancel">cancelar</string>
+    <string name="ok">ok</string>
+    <string name="titleCreate">crear producto</string>
+    <string name="missing">faltan datos</string>
+    <string name="delete">borrar: seguro?</string>
+    <string name="update">editar producto</string>
+</resources>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
@@ -39,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         productList = new ArrayList<>(); //importante, no olvidar inicializar lista al crearla
+
+        adapter = new ProductAdapter(productList, R.layout.product_view_holder, MainActivity.this); //adapter siempre despues de inicializar el arraylist
+            //este es el contructor del ProductAdapter, le pasamos: la lista, que vista queremos mostrar q es el resource y donde queremos mostrarla que es en el main
+
+        layoutManager = new GridLayoutManager(this, 2); //mostrara las cosas en columnas de 2
+
+        binding.contentMain.container.setAdapter(adapter);
+        binding.contentMain.container.setLayoutManager(layoutManager);
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,10 +113,8 @@ public class MainActivity extends AppCompatActivity {
                             Float.parseFloat(txtPrice.getText().toString()));
 
                     productList.add(0, product);
-                    /*
-                    por hacer: redibujar el recyclerview
-                     */
-                    Toast.makeText(MainActivity.this, product.toString(), Toast.LENGTH_SHORT).show();
+                    adapter.notifyItemInserted(0);
+                   // Toast.makeText(MainActivity.this, product.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
