@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -121,5 +122,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         return builder.create();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) { //metodo para q funcione el movil cuando se gire
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("LIST", productList);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) { //metodo para q funcione el movil cuando se gire
+        super.onRestoreInstanceState(savedInstanceState);
+
+        productList.addAll((ArrayList<Product>) savedInstanceState.getSerializable("LIST"));
+
+        adapter.notifyItemRangeInserted(0, productList.size());
     }
 }
