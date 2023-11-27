@@ -3,6 +3,7 @@ package montacer.elfazazi.ejerc5clasepmdmtema1.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,20 +17,28 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import montacer.elfazazi.ejerc5clasepmdmtema1.R;
+import montacer.elfazazi.ejerc5clasepmdmtema1.configuracion.Constantes;
 import montacer.elfazazi.ejerc5clasepmdmtema1.modelos.Product;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductVH> {
     private List<Product> objects; //elementos a mostrar
     private int resource; //vista a mostrar
     private Context context; //donde se mostrar
+    private SharedPreferences sp;
+    private Gson gson;
 
     public ProductAdapter(List<Product> objects, int resource, Context context) {
         this.objects = objects;
         this.resource = resource;
         this.context = context;
+
+        gson = new Gson();
+        sp = context.getSharedPreferences(Constantes.DATOS, context.MODE_PRIVATE);
     }
 
     @NonNull
@@ -133,10 +142,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     product.setPrice(Float.parseFloat(txtPrice.getText().toString()));
 
                     notifyItemChanged(objects.indexOf(product));
+                    guardarInformacion();
                 }
             }
         });
         return builder.create();
+    }
+
+    private void guardarInformacion() {
+        SharedPreferences.Editor editor = sp.edit();
+        String listaJson = gson.toJson(objects);
+        editor.putString(Constantes.LISTAPRODUCTOS, listaJson);
+        editor.apply();
     }
 
     private AlertDialog confirmDelete(Product product){
@@ -151,6 +168,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 int position = objects.indexOf(product);
                 objects.remove(product);
                 notifyItemRemoved(position); //position da error, poner holder.getAdapterPosition(), el notify redibuja la lista
+                guardarInformacion();
 
             }
         });
