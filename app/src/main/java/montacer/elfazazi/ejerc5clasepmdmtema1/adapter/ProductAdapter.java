@@ -176,7 +176,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return builder.create();
     }
 
-    public class ProductVH extends RecyclerView.ViewHolder{ //localizo los elementos del contexto
+    public class ProductVH extends RecyclerView.ViewHolder{ //localizo los elementos del contextoo
         TextView lbName, lbQuantity;
         ImageButton btnDelete;
         public ProductVH(@NonNull View itemView) {
