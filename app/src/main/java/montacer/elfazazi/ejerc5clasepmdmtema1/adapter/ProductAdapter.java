@@ -37,7 +37,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         this.resource = resource;
         this.context = context;
 
-        gson = new Gson();
+        gson = new Gson();;
         sp = context.getSharedPreferences(Constantes.DATOS, context.MODE_PRIVATE);
     }
 
